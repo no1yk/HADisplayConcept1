@@ -1,0 +1,602 @@
+type: sections
+max_columns: 6
+title: Home
+path: new
+subview: false
+sections:
+  - type: grid
+    cards:
+      - type: custom:digital-clock
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              outline: none !important;
+              border: none !important;
+            }
+            ha-card .first-line {
+              text-align: left !important;
+              padding: 0 8px;
+            }
+            ha-card .second-line {
+              text-align: left !important;
+              padding: 0 12px;
+            }
+      - type: custom:gap-card
+        grid_options:
+          columns: 3
+          rows: auto
+      - show_current: true
+        show_forecast: false
+        type: weather-forecast
+        entity: weather.home
+        secondary_info_attribute: humidity
+        forecast_type: daily
+        card_mod:
+          style: |
+            ha-card {
+              
+              background: none !important;
+              box-shadow: none !important;
+              outline: none !important;
+              border: none !important;
+              padding: 0px !important;
+            }
+        grid_options:
+          columns: 9
+          rows: auto
+    column_span: 2
+  - type: grid
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:gap-card
+          - type: custom:gap-card
+          - type: custom:bubble-card
+            card_type: button
+            entity: script.on_speed
+            card_layout: normal
+            sub_button: []
+            scrolling_effect: true
+            show_name: true
+            show_icon: true
+            name: Fan
+            button_type: switch
+            tap_action:
+              action: navigate
+              url_path: "#fan-controls"
+              navigation_path: "#fan-controls"
+            button_action:
+              tap_action:
+                action: navigate
+                url_path: "#fan-controls"
+                navigation_path: "#fan-controls"
+              double_tap_action:
+                target:
+                  entity_id: script.on_speed
+                service: ""
+          - type: custom:bubble-card
+            card_type: button
+            card_layout: normal
+            sub_button: []
+            scrolling_effect: true
+            show_name: true
+            show_icon: true
+            name: Media
+            button_type: name
+            icon: mdi:television-play
+            tap_action:
+              action: navigate
+              navigation_path: "#my-media"
+            button_action:
+              tap_action:
+                action: navigate
+                navigation_path: "#my-media"
+          - type: custom:bubble-card
+            card_type: button
+            entity: script.start_sleep_sound
+            card_layout: normal
+            sub_button: []
+            scrolling_effect: false
+            show_name: true
+            show_icon: true
+            name: Play sleep sounds
+            button_type: switch
+            show_state: false
+            icon: mdi:power-sleep
+            show_last_changed: false
+            show_attribute: false
+            force_icon: false
+            styles: |-
+              .bubble-button-background {
+                  opacity: 1 !important;
+                  background-color: ${state === 'on' ? 'slategrey' : 'clear'} !important;
+                }
+
+              .bubble-icon {
+                color: ${state === 'on' ? 'slategrey' : 'clear'} !important;
+              }
+            tap_action:
+              action: toggle
+              target: {}
+            double_tap_action:
+              action: perform-action
+              perform_action: script.stop_sonos
+              target: {}
+            button_action:
+              double_tap_action:
+                action: perform-action
+                perform_action: script.stop_sonos
+                target: {}
+          - type: custom:bubble-card
+            card_type: button
+            entity: automation.pause_sonos
+            card_layout: normal
+            sub_button: []
+            scrolling_effect: false
+            show_name: true
+            show_icon: true
+            name: Sleep Timer
+            button_type: switch
+            show_state: false
+            icon: mdi:bed-clock
+            show_last_changed: false
+            show_attribute: false
+            force_icon: false
+            styles: |-
+              .bubble-button-background {
+                  opacity: 1 !important;
+                  background-color: ${state === 'on' ? 'slategrey' : 'clear'} !important;
+                }
+
+              .bubble-icon {
+                color: ${state === 'on' ? 'slategrey' : 'clear'} !important;
+              }
+        grid_options:
+          columns: 4
+          rows: auto
+      - type: custom:gap-card
+        grid_options:
+          columns: 1
+          rows: auto
+      - type: custom:more-info-card
+        entity: light.bedroom_lights
+        card_mod:
+          style:
+            more-info-content$ more-info-light $ ha-more-info-state-header$: |
+              p {
+                display: none;
+              }
+            more-info-content$ more-info-light$ div$ light-color-rgb-picker$: |
+              .color-container {
+                native-color-picker {
+                  display: none;
+                }
+              }
+            more-info-content$ more-info-light$: |
+              div {
+                display: none;
+              }
+              .controls {
+                .color-container {
+                  display: none;
+                }
+                ha-state-control-light-brightness {
+                  display: block;
+                }
+                ha-icon-button-group {
+                  display: block;
+                }
+                light-color-rgb-picker {
+                  display: block;
+                  width: 50%;
+                  padding: 0px;
+                  margin: 0px;
+                }
+                light-color-rgb-picker .native-color-picker .container {
+                  display: none;
+                }
+              }
+            .: |
+              .type-custom-more-info-card {
+               
+                text-align:center;
+                background: none !important;
+                box-shadow: none !important;
+                outline: none !important;
+                border: none !important;
+              }
+              .type-custom-more-info-card state-card-content {
+                display: none;
+              }
+        grid_options:
+          columns: 6
+          rows: auto
+      - type: custom:more-info-card
+        entity: light.bedroom_lamp
+        card_mod:
+          style:
+            more-info-content$ more-info-light $ ha-more-info-state-header$: |
+              p {
+                display: none;
+              }
+            more-info-content$ more-info-light$ div$ light-color-rgb-picker$: |
+              .color-container {
+                native-color-picker {
+                  display: none;
+                }
+              }
+            more-info-content$ more-info-light$: |
+              div {
+                display: none;
+              }
+              .controls {
+                .color-container {
+                  display: none;
+                }
+                ha-state-control-light-brightness {
+                  display: block;
+                }
+                ha-icon-button-group {
+                  display: block;
+                }
+                light-color-rgb-picker {
+                  display: block;
+                  width: 50%;
+                  padding: 0px;
+                  margin: 0px;
+                }
+                light-color-rgb-picker .native-color-picker .container {
+                  display: none;
+                }
+              }
+            .: |
+              .type-custom-more-info-card {
+               
+                text-align:center;
+                background: none !important;
+                box-shadow: none !important;
+                outline: none !important;
+                border: none !important;
+              }
+              .type-custom-more-info-card state-card-content {
+                display: none;
+              }
+        grid_options:
+          columns: 6
+          rows: auto
+      - type: custom:more-info-card
+        entity: light.corner_lamp
+        card_mod:
+          style:
+            more-info-content$ more-info-light $ ha-more-info-state-header$: |
+              p {
+                display: none;
+              }
+            more-info-content$ more-info-light$ div$ light-color-rgb-picker$: |
+              .color-container {
+                native-color-picker {
+                  display: none;
+                }
+              }
+            more-info-content$ more-info-light$: |
+              div {
+                display: none;
+              }
+              .controls {
+                .color-container {
+                  display: none;
+                }
+                ha-state-control-light-brightness {
+                  display: block;
+                }
+                ha-icon-button-group {
+                  display: block;
+                }
+                light-color-rgb-picker {
+                  display: block;
+                  width: 50%;
+                  padding: 0px;
+                  margin: 0px;
+                }
+                light-color-rgb-picker .native-color-picker .container {
+                  display: none;
+                }
+              }
+            .: |
+              .type-custom-more-info-card {
+               
+                text-align:center;
+                background: none !important;
+                box-shadow: none !important;
+                outline: none !important;
+                border: none !important;
+              }
+              .type-custom-more-info-card state-card-content {
+                display: none;
+              }
+        grid_options:
+          columns: 6
+          rows: auto
+      - type: custom:gap-card
+        grid_options:
+          columns: 1
+          rows: auto
+      - type: heading
+        icon: ""
+        heading_style: subtitle
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.dyson_purifier_temperature
+          - type: entity
+            entity: sensor.dyson_purifier_humidity
+        grid_options:
+          columns: 72
+          rows: auto
+    column_span: 6
+  - type: grid
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: "#fan-controls"
+            name: Fan Controls
+            button_type: name
+            icon: mdi:fan
+            auto_close: "60000"
+            show_header: false
+            bg_color: "#708090"
+            backdrop_blur: "5"
+          - type: custom:bubble-card
+            card_type: separator
+            name: Fan Controls
+            icon: mdi:fan
+            card_layout: normal
+          - type: custom:more-info-card
+            entity: fan.dyson_purifier
+            grid_options:
+              columns: 8
+              rows: auto
+            card_mod:
+              style:
+                more-info-content$ more-info-fan $ ha-more-info-state-header$: |
+                  p {
+                    display: none;
+                  }
+                more-info-content$ more-info-fan$: |
+                  .controls {
+                    ha-state-control-fan-speed {
+                      margin-bottom: 6px !important;
+                    }
+                  }
+                  .controls:not(:last-child) {
+                    margin-bottom: 2px !important;
+                  }
+                .: |
+                  .type-custom-more-info-card {
+                   
+                    text-align:center;
+                    background: none !important;
+                    box-shadow: none !important;
+                    outline: none !important;
+                    border: none !important;
+                  }
+                  .type-custom-more-info-card state-card-content {
+                    display: none;
+                  }
+          - type: custom:bubble-card
+            card_type: separator
+            name: Circulator
+          - type: horizontal-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                entity: script.on_speed
+                name: On/Speed
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: mdi:power
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    select_attribute: effect_list
+                    sub_button: []
+                    button_type: switch
+                    entity: script.off
+                    name: "Off"
+                    tap_action:
+                      service: script.on_speed
+                      target: {}
+                      action: toggle
+                    icon: mdi:circle-off-outline
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    select_attribute: effect_list
+                    sub_button: []
+                    button_type: switch
+                    entity: script.swing
+                    name: Swing
+                    tap_action:
+                      service: script.on_speed
+                      target: {}
+                      action: toggle
+                    icon: mdi:arrow-oscillating
+                    double_tap_action: {}
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: "#my-media"
+            name: Fan Controls
+            button_type: name
+            icon: mdi:fan
+            auto_close: "60000"
+            show_header: false
+            bg_color: "#708090"
+            backdrop_blur: "0"
+          - type: custom:bubble-card
+            card_type: separator
+            name: Media Controls
+            icon: mdi:television-play
+          - type: media-control
+            entity: media_player.my_sonos
+            theme: iOS Dark Mode
+          - type: media-control
+            entity: media_player.my_room
+            theme: iOS Dark Mode
+          - type: custom:bubble-card
+            card_type: separator
+            name: Projector
+            icon: mdi:projector
+          - square: false
+            type: grid
+            cards:
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: "On"
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.projector_on
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: "Off"
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.projector_off
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: Menu
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.menu
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: HDMI2
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.hdmi2
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: Vol Up
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.volume_up
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: HDMI1
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.hdmi1
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: Left/Source
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.left_source
+                scrolling_effect: false
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: Enter
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.enter
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: Right/Resync
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.right_resync
+                scrolling_effect: false
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: 3D
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.projector_3d
+              - type: custom:bubble-card
+                card_type: button
+                select_attribute: effect_list
+                sub_button: []
+                button_type: switch
+                name: Vol Down
+                tap_action:
+                  action: toggle
+                  service: script.on_speed
+                  target: {}
+                icon: ""
+                entity: script.volume_down
+cards: []
+badges: []
+dense_section_placement: false
